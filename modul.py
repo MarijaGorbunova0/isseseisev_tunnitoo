@@ -3,7 +3,7 @@ from operator import index
 import smtplib, ssl
 from email.message import EmailMessage
 #1
-def registr(nimi, parool, kasutajad:list, paroolid:list):
+def registr(nimi, parool, kasutajad:list, paroolid:list): #registrerimine
    if nimi in kasutajad:
        print("kirjutage uus nimi")
    else:
@@ -11,7 +11,7 @@ def registr(nimi, parool, kasutajad:list, paroolid:list):
        paroolid.append(parool)
        return kasutajad,paroolid
 #2
-def autoris(kasutajad: list, paroolid: list, polzovateli):
+def autoris(kasutajad: list, paroolid: list, polzovateli): #autoriseerimine 
     nimi = input("Kirjutage oma nimi: ")
     if nimi in kasutajad:
         nimiIndeks = kasutajad.index(nimi)
@@ -26,9 +26,9 @@ def autoris(kasutajad: list, paroolid: list, polzovateli):
             return kasutajad, paroolid
     else:
          print("Sulle vaja registreerida")
-         return kasutajad, paroolid
+         return kasutajad, paroolid 
 #3
-def uus_parool_nimi(polzovateli,kasutajad:list,paroolid:list):
+def uus_parool_nimi(polzovateli, kasutajad:list, paroolid:list): #uue paroli registrerimine
     zamena = int(input("kirjutage mida te tahate vahetada parol - 1, nimi - 2"))
     if zamena == 2:
         uusNimi = input("kirjutage uus nimi ")
@@ -43,10 +43,10 @@ def uus_parool_nimi(polzovateli,kasutajad:list,paroolid:list):
         print("teie parool on edukalt muudetud!")
         return polzovateli
 #4
-def unustanudPR(paroolid, kasutajad):
+def unustanudPR(paroolid, kasutajad): #unustanud parooli 
     nimi = input("kirjutage oma nimi")
     if nimi in kasutajad:
-        kiri = int(input("Sain meili teel parooli lähtestamise koodi.\n näita koodi - 1 \n parooli lähtestamise tühistamine – 2"))
+        kiri = int(input("te tahte vahetada parooli? kinnitada - 1\n parooli lähtestamise tühistamine – 2"))
         while True:
             if kiri == 1:
                 smtp_server = "smtp.gmail.com"
@@ -56,10 +56,10 @@ def unustanudPR(paroolid, kasutajad):
                 #create a secure SSL conntex
                 context = ssl.create_default_context()
                 msg = EmailMessage()
-                msg.set_content(random.randint(1, 100))
-                msg["Subject"] = "Tere Roman"
-                msg["From"] = "mariarapirovna@gmail.com"
-                msg["To"] = "sandakovroman2@gmail.com"
+                msg.set_content = 324
+                msg["Subject"] = "324"
+                msg["From"] = sender_email
+                msg["To"] = sender_email 
                 #"try to log to server and email
                 try:
                     server = smtplib.SMTP(smtp_server, port)
@@ -91,3 +91,22 @@ def unustanudPR(paroolid, kasutajad):
     else:
         print("selle nimega kasutajat pole")
 
+def loe_failist(fail:str):
+    """ Loeme failist read ja salvestame järjendisse. Funktsioon
+    tagastab järjend
+    :param str faili
+    :rtype: list
+    """
+    f = open(fail, "r", encoding="utf-8")#try
+    järjend = []
+    for rida in f:
+        järjend.append(rida.strip())
+    f.close()
+    return järjend
+def kirjuta_failisse(fail:str, jarjend =[]):
+    n = int(input("sisesta mitu elemendid"))
+    for i in range (n):
+        jarjend.append(input(f"{i+1}.element "))
+        f = open(fail, "w", encoding="utf-8")
+        for el in jarjend:
+            f.wri
